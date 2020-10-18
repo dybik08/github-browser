@@ -12,6 +12,6 @@ describe('App testing', () => {
   it('render correct app header', () => {
     const wrapper = shallow(<App />);
     const headerTitle = wrapper.find({className: 'App-header'}).text();
-    expect(headerTitle).toBe('Github Searcher');
+    expect(headerTitle).toBe('Github Browser');
   })
 });

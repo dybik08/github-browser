@@ -1,28 +1,30 @@
 import React, {useState} from 'react';
 import './App.css';
-import SearchReposButton from './Components/SearchReposButton';
-import TableComponent from './Components/Table';
+import ReposDataTable from './Components/Table';
+import SearchReposInput from "./Components/SearchReposInput";
+import RepoDetailsModal from "./Components/RepoDetailsModal/RepoDetailsModal";
+import {Repository} from "./Constants/types";
 
-interface repoData {
-    key: string;
-    login: string;
-    language: string;
-    stargazers_count: number;
-    name: string;
-}
 
 export function App() {
     const [repos, setRepos] = React.useState(null);
-    const [inputValue, setInputValue] = React.useState('');
-    const [reposLoading, setReposLoading] = React.useState(false);
-    const [modalVisible, setModalVisible] = useState<repoData | null>(null);
+    const [inputValue, setInputValue] = React.useState<string>('');
+    const [reposLoading, setReposLoading] = React.useState<boolean>(false);
+    const [modalVisible, setModalVisible] = useState<Repository | null>(null);
 
+    const handleOk = () => {
+        setModalVisible(null);
+    };
+
+    const handleCancel = () => {
+        setModalVisible(null);
+    };
 
     return (
         <div className='App'>
-            <header className='App-header'>Github Searcher</header>
+            <header className='App-header'>Github Browser</header>
             <div style={{ margin: '10px 20px' }}>
-                <SearchReposButton
+                <SearchReposInput
                     setInputValue={setInputValue}
                     reposLoading={reposLoading}
                     setReposLoading={setReposLoading}
@@ -32,7 +34,8 @@ export function App() {
                     modalVisible={modalVisible}
                     setModalVisible={setModalVisible}
                 />
-                <TableComponent repos={repos} />
+                <RepoDetailsModal repository_data={modalVisible} handleOk={handleOk} handleCancel={handleCancel} />
+                <ReposDataTable repos={repos} />
             </div>
         </div>
     );

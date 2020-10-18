@@ -16,6 +16,7 @@
 .App-header {
   background-color: #282c34;
   min-height: 10vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,6 +24,17 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+@media only screen and (max-width: 600px) {
+  div.ant-table-empty.ant-table {
+    font-size: 0.6em;
+  }
+
+  span.ant-table-filter-column-title {
+    padding: 16px 2.3em 16px 8px;
+  }
+}
+
 
 .App-link {
   color: #61dafb;
@@ -52,4 +64,30 @@
 .ant-input-group-wrapper.search-row{
   width: 50%;
   margin: 20px auto;
+}
+
+.repository-list-item-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+  align-items: center;
+}
+
+.repository-list-item-title {
+  flex: 3;
+  flex-wrap: wrap;
+}
+
+.repository-list-item-language {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.repository-details-modal-info-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 50%;
+  align-items: center;
 }

@@ -2,33 +2,7 @@ import { Table, Input, Button, Space } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import React from 'react';
 import 'antd/dist/antd.css';
-
-const data = [
-    {
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-    },
-    {
-        key: '2',
-        name: 'Joe Black',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-    },
-    {
-        key: '3',
-        name: 'Jim Green',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-    },
-    {
-        key: '4',
-        name: 'Jim Red',
-        age: 32,
-        address: 'London No. 2 Lake Park',
-    },
-];
+import CONSTANTS from '../Constants/constants'
 
 const TableComponent = (props: any) => {
     const [state, setState] = React.useState({
@@ -94,46 +68,40 @@ const TableComponent = (props: any) => {
 
     const columns = [
         {
-            title: 'login',
-            dataIndex: 'login',
-            key: 'login',
-            width: '30%',
-            ...getColumnSearchProps('login'),
+            title: CONSTANTS.REPO_DATA_FIELDS.login,
+            dataIndex: CONSTANTS.REPO_DATA_FIELDS.login,
+            key: CONSTANTS.REPO_DATA_FIELDS.login,
+            ...getColumnSearchProps(CONSTANTS.REPO_DATA_FIELDS.login),
         },
         {
-            title: 'language',
-            dataIndex: 'language',
-            key: 'language',
+            title: CONSTANTS.REPO_DATA_FIELDS.language,
+            dataIndex: CONSTANTS.REPO_DATA_FIELDS.language,
+            key: CONSTANTS.REPO_DATA_FIELDS.language,
             width: '20%',
-            ...getColumnSearchProps('language'),
+            ...getColumnSearchProps(CONSTANTS.REPO_DATA_FIELDS.language),
         },
         {
-            title: 'stargazers_count',
-            dataIndex: 'stargazers_count',
-            key: 'stargazers_count',
-            ...getColumnSearchProps('stargazers_count'),
+            title: CONSTANTS.REPO_DATA_FIELDS.stargazers_count,
+            dataIndex: CONSTANTS.REPO_DATA_FIELDS.stargazers_count,
+            key: CONSTANTS.REPO_DATA_FIELDS.stargazers_count,
+            ...getColumnSearchProps(CONSTANTS.REPO_DATA_FIELDS.stargazers_count),
         },
         {
-            title: 'name',
-            dataIndex: 'name',
-            key: 'name',
-            ...getColumnSearchProps('name'),
+            title: CONSTANTS.REPO_DATA_FIELDS.name,
+            dataIndex: CONSTANTS.REPO_DATA_FIELDS.name,
+            key: CONSTANTS.REPO_DATA_FIELDS.name,
+            width: '30%',
+            ...getColumnSearchProps(CONSTANTS.REPO_DATA_FIELDS.name),
         },
         {
-            title: (
-                <span className='roles-actions-header'>
-                    Actions
-                    <i className='fas fa-plus' onClick={() => console.log('action 1')} />
-                </span>
-            ),
             width: '5%',
-            dataIndex: 'details',
-            key: 'details',
+            dataIndex: CONSTANTS.REPO_DATA_FIELDS.details,
+            key: CONSTANTS.REPO_DATA_FIELDS.details,
             render: (text: any) => text,
         },
     ];
 
-    return <Table pagination={{pageSize: 5}}columns={columns} dataSource={props.repos} />;
+    return <Table pagination={{pageSize: 5}} columns={columns} dataSource={props.repos} />;
 };
 
 export default TableComponent;
