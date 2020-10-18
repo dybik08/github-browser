@@ -22,7 +22,7 @@ interface RepoDetailsModalProps {
     handleCancel: () => void;
 }
 
-const RepoDetailsModal: React.FC<RepoDetailsModalProps> = (props) => {
+export const RepoDetailsModal: React.FC<RepoDetailsModalProps> = (props) => {
     const { repository_data, handleOk, handleCancel } = props;
     const [reposData, setReposData] = useState([]);
 
@@ -49,7 +49,7 @@ const RepoDetailsModal: React.FC<RepoDetailsModalProps> = (props) => {
                     <p>
                         <RepoIcon /> {repository_data.name}
                     </p>
-                    <p>{repository_data.description}</p>
+                    <p id={'repo-description'}>{repository_data.description}</p>
                     <RepoInfoRow repository_data={repository_data} />
                     <Collapse onChange={onCollapsePanelPress} style={{ marginTop: '20px' }} accordion>
                         <Panel header={repository_data.owner.type} key='1'>
@@ -64,8 +64,8 @@ const RepoDetailsModal: React.FC<RepoDetailsModalProps> = (props) => {
                             </div>
                         </Panel>
                         <Panel header='Repo details' key='2'>
-                            <p>Created: {repository_data.created_at.split('T')[0]}</p>
-                            <p>Last change: {repository_data.updated_at.split('T')[0]}</p>
+                            <p id='created_at'>Created: {repository_data.created_at.split('T')[0]}</p>
+                            <p id='updated_at'>Last change: {repository_data.updated_at.split('T')[0]}</p>
                             {repository_data.license && <p>License: {repository_data.license.name}</p>}
                         </Panel>
                         <Panel header={repository_data.owner.type + ' repos'} key='3'>

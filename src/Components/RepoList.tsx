@@ -10,9 +10,9 @@ interface RepoListProps {
 const RepoList: React.FC<RepoListProps> = ({ repositories }) => {
     const repositoryList =
         repositories &&
-        repositories.map((repository: Repository) => {
+        repositories.map((repository: Repository, index: number) => {
             return (
-                <div className='repository-list-item-container'>
+                <div key={repository.name + index} className='repository-list-item-container'>
                     <div className='repository-list-item-title'>{repository.name}</div>
                     <div className='repository-list-item-language'>
                         <div className='dot' style={{ backgroundColor: githubLangColors[repository.language] }} />
