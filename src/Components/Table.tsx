@@ -81,7 +81,7 @@ const TableComponent = (props: any) => {
             ...getColumnSearchProps(CONSTANTS.REPO_DATA_FIELDS.language),
         },
         {
-            title: CONSTANTS.REPO_DATA_FIELDS.stargazers_count,
+            title: 'stars',
             dataIndex: CONSTANTS.REPO_DATA_FIELDS.stargazers_count,
             key: CONSTANTS.REPO_DATA_FIELDS.stargazers_count,
             ...getColumnSearchProps(CONSTANTS.REPO_DATA_FIELDS.stargazers_count),
