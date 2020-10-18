@@ -1,9 +1,17 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import {App} from './App';
+import { configure, shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+jest.mock('antd/dist/antd.css');
+
+configure({ adapter: new Adapter() });
+
+describe('App testing', () => {
+
+  it('render correct app header', () => {
+    const wrapper = shallow(<App />);
+    const headerTitle = wrapper.find({className: 'App-header'}).text();
+    expect(headerTitle).toBe('Github Searcher');
+  })
 });

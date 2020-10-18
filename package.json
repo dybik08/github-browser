@@ -8,12 +8,12 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^24.9.1",
     "@types/node": "^12.12.67",
     "@types/react": "^16.9.52",
     "@types/react-dom": "^16.9.8",
     "antd": "^4.7.0",
     "axios": "^0.20.0",
+    "jest-transform-css": "^2.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
@@ -22,7 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "CI= react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -41,6 +41,31 @@
     ]
   },
   "devDependencies": {
-    "prettier": "^2.1.2"
+    "@types/enzyme": "^3.10.7",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/jest": "^24.9.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
+    "jest": "^26.5.3",
+    "prettier": "^2.1.2",
+    "raf": "^3.4.1",
+    "ts-jest": "^26.4.1"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js",
+      ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(antd)/)"
+    ],
+    "setupFiles": [
+      "raf/polyfill"
+    ]
   }
 }

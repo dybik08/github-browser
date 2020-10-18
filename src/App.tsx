@@ -11,7 +11,7 @@ interface repoData {
     name: string;
 }
 
-function App() {
+export function App() {
     const [repos, setRepos] = React.useState(null);
     const [inputValue, setInputValue] = React.useState('');
     const [reposLoading, setReposLoading] = React.useState(false);
