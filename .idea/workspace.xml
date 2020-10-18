@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="488e40e8-9d41-4672-8e35-a36bc569bfe5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/RepoDetailsModal/RepoDetailsModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/RepoDetailsModal/RepoDetailsModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/RepoDetailsModal/RepoInfoRow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/RepoDetailsModal/RepoInfoRow.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/RepoList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/RepoList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +78,7 @@
       <workItem from="1602615242706" duration="7246000" />
       <workItem from="1602790957391" duration="13702000" />
       <workItem from="1602874108957" duration="1392000" />
-      <workItem from="1603021891075" duration="24886000" />
+      <workItem from="1603021891075" duration="25302000" />
     </task>
     <task id="LOCAL-00001" summary="initial - a bit late but still viable">
       <created>1602805754043</created>
@@ -128,7 +122,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603056126917</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="add some unit testing">
+      <created>1603060754945</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1603060754945</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,6 +155,7 @@
     <MESSAGE value="setup jest &amp; enzyme" />
     <MESSAGE value="further refactor: extract components, move styles to .css file and add types" />
     <MESSAGE value="further refactor: add new site icon, remove unused code and add missing types" />
-    <option name="LAST_COMMIT_MESSAGE" value="further refactor: add new site icon, remove unused code and add missing types" />
+    <MESSAGE value="add some unit testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="add some unit testing" />
   </component>
 </project>
