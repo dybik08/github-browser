@@ -1,16 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import SearchReposButton from './Components/SearchReposButton';
-import SearchReposResults from './Components/SearchReposResults';
 import TableComponent from './Components/Table';
-import SearchReposInput from './Components/SearchReposInput';
-import { Button } from 'antd';
+
+interface repoData {
+    key: string;
+    login: string;
+    language: string;
+    stargazers_count: number;
+    name: string;
+}
 
 function App() {
     const [repos, setRepos] = React.useState(null);
-    const [pagination, setPagination] = React.useState(5);
     const [inputValue, setInputValue] = React.useState('');
     const [reposLoading, setReposLoading] = React.useState(false);
+    const [modalVisible, setModalVisible] = useState<repoData | null>(null);
+
 
     return (
         <div className='App'>
@@ -21,37 +27,11 @@ function App() {
                     reposLoading={reposLoading}
                     setReposLoading={setReposLoading}
                     inputValue={inputValue}
-                    pagination={pagination}
                     repos={repos}
                     setRepos={setRepos}
+                    modalVisible={modalVisible}
+                    setModalVisible={setModalVisible}
                 />
-                <div>
-                    <h1>Fetch results: </h1>
-                    <Button
-                        size='small'
-                        type={pagination === 5 ? 'primary' : 'default'}
-                        style={{ margin: '0px 10px' }}
-                        onClick={() => setPagination(5)}
-                    >
-                        5
-                    </Button>
-                    <Button
-                        size='small'
-                        type={pagination === 10 ? 'primary' : 'default'}
-                        style={{ margin: '0px 10px' }}
-                        onClick={() => setPagination(10)}
-                    >
-                        10
-                    </Button>
-                    <Button
-                        size='small'
-                        type={pagination === 15 ? 'primary' : 'default'}
-                        style={{ margin: '0px 10px' }}
-                        onClick={() => setPagination(15)}
-                    >
-                        15
-                    </Button>
-                </div>
                 <TableComponent repos={repos} />
             </div>
         </div>

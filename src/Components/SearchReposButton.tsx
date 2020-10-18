@@ -1,45 +1,46 @@
-import React, {useState} from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import { Button } from 'antd';
 import { Input } from 'antd';
-import RepoDetailsModal from "./RepoDetailsModal";
+import RepoDetailsModal from './RepoDetailsModal';
+import { fetchRepos } from '../actions/network_actions';
 
 const { Search } = Input;
 
 interface repoData {
-    key: string
-    login: string
-    language: string
-    stargazers_count: number
-    name: string
+    key: string;
+    login: string;
+    language: string;
+    stargazers_count: number;
+    name: string;
 }
 
+const formatResponseData = (data: any, onButtonPressCallback: (data: any) => void) => {
+    return data.items.map((repoData: any, index: number) => ({
+        key: `${index}`,
+        login: repoData.owner.login,
+        language: repoData.language,
+        stargazers_count: repoData.stargazers_count,
+        name: repoData.name,
+        details: (
+            <Button type='primary' onClick={e => onButtonPressCallback(repoData)}>
+                Details
+            </Button>
+        ),
+    }));
+};
+
 const SearchReposButton = (props: any) => {
-    const [visible, setVisible ] = useState<repoData | null>(null);
-
-    const onSearchReposButtonPress = () => {
+    const {
+        setModalVisible,
+        modalVisible
+    } = props;
+    const onSearchReposButtonPress = async () => {
         props.setReposLoading(true);
-        axios.get(`https://api.github.com/search/repositories?q=${props.inputValue}&per_page=${props.pagination}`).then(res => {
-            const formatData = res.data.items.map((data: any, index: number) => {
-                const dataObject = {
-                    key: `${index}`,
-                    login: data.owner.login,
-                    language: data.language,
-                    stargazers_count: data.stargazers_count,
-                    name: data.name,
-                };
-                console.log('data from backend: ', data);
-                return {
-                    ...dataObject,
-                    details: <Button type='primary' onClick={e => setVisible(data)}>Details</Button>,
-                };
-            });
+        const { data } = await fetchRepos(props.inputValue);
+        const formattedData = formatResponseData(data, setModalVisible);
 
-            props.setRepos(formatData);
-            setTimeout(() => {
-                props.setReposLoading(false)
-            }, 500)
-        });
+        props.setRepos(formattedData);
+        props.setReposLoading(false);
     };
 
     const handleInputChange = (event: any) => {
@@ -47,17 +48,25 @@ const SearchReposButton = (props: any) => {
     };
 
     const handleOk = (e: any) => {
-        setVisible(null)
+        setModalVisible(null);
     };
 
     const handleCancel = (e: any) => {
-        setVisible(null)
+        setModalVisible(null);
     };
 
     return (
         <>
-            <RepoDetailsModal visible={visible} handleOk={handleOk} handleCancel={handleCancel}  />
-            <Search value={props.inputValue} onSearch={onSearchReposButtonPress}  onChange={event => handleInputChange(event)} placeholder="input search loading with enterButton" loading={props.reposLoading} enterButton />
+            <RepoDetailsModal visible={modalVisible} handleOk={handleOk} handleCancel={handleCancel} />
+            <Search
+                className='search-row'
+                value={props.inputValue}
+                onSearch={onSearchReposButtonPress}
+                onChange={event => handleInputChange(event)}
+                placeholder='input search loading with enter button'
+                loading={props.reposLoading}
+                enterButton
+            />
         </>
     );
 };

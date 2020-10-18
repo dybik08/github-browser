@@ -48,3 +48,8 @@
 .icon {
   margin-right: 5px;
 }
+
+.ant-input-group-wrapper.search-row{
+  width: 50%;
+  margin: 20px auto;
+}
