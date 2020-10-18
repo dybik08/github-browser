@@ -7,17 +7,17 @@ import {Repository} from "./Constants/types";
 
 
 export function App() {
-    const [repos, setRepos] = React.useState(null);
+    const [repos, setRepos] = React.useState<Repository[] | null>(null);
     const [inputValue, setInputValue] = React.useState<string>('');
     const [reposLoading, setReposLoading] = React.useState<boolean>(false);
-    const [modalVisible, setModalVisible] = useState<Repository | null>(null);
+    const [selectedRepository, setSelectedRepository] = useState<Repository | null>(null);
 
     const handleOk = () => {
-        setModalVisible(null);
+        setSelectedRepository(null);
     };
 
     const handleCancel = () => {
-        setModalVisible(null);
+        setSelectedRepository(null);
     };
 
     return (
@@ -31,10 +31,9 @@ export function App() {
                     inputValue={inputValue}
                     repos={repos}
                     setRepos={setRepos}
-                    modalVisible={modalVisible}
-                    setModalVisible={setModalVisible}
+                    setSelectedRepository={setSelectedRepository}
                 />
-                <RepoDetailsModal repository_data={modalVisible} handleOk={handleOk} handleCancel={handleCancel} />
+                <RepoDetailsModal repository_data={selectedRepository} handleOk={handleOk} handleCancel={handleCancel} />
                 <ReposDataTable repos={repos} />
             </div>
         </div>

@@ -1,10 +1,12 @@
 import React from 'react';
-import { Button, Input } from 'antd';
+import { Button, Input, message, Tooltip } from 'antd';
 import { fetchRepos } from '../actions/network_actions';
+import { Repository } from '../Constants/types';
+import { InfoCircleOutlined } from '@ant-design/icons/lib';
 const { Search } = Input;
 
-const formatResponseData = (data: any, onButtonPressCallback: (data: any) => void) => {
-    return data.items.map((repoData: any, index: number) => ({
+const formatReposResponseData = (data: any, onButtonPressCallback: (repoData: Repository) => void) => {
+    return data.items.map((repoData: Repository, index: number) => ({
         key: `${index}`,
         login: repoData.owner.login,
         language: repoData.language,
@@ -18,31 +20,52 @@ const formatResponseData = (data: any, onButtonPressCallback: (data: any) => voi
     }));
 };
 
-const SearchReposInput = (props: any) => {
-    const { setModalVisible } = props;
+interface SearchReposInputProps {
+    setInputValue: (inputValue: string) => void;
+    reposLoading: boolean;
+    setReposLoading: (loading: boolean) => void;
+    inputValue: string;
+    repos: Repository[] | null;
+    setRepos: (repos: Repository[]) => void;
+    setSelectedRepository: (repo: Repository) => void;
+}
 
-    const handleInputChange = (event: any) => {
-        props.setInputValue(event.target.value);
+const SearchReposInput: React.FC<SearchReposInputProps> = props => {
+    const { setSelectedRepository, setInputValue, setReposLoading, setRepos, inputValue, reposLoading } = props;
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(event.target.value);
     };
 
     const onSearchReposButtonPress = async () => {
-        props.setReposLoading(true);
-        const { data } = await fetchRepos(props.inputValue);
-        const formattedData = formatResponseData(data, setModalVisible);
+        if (inputValue.length === 0) {
+            return message.error('Please fill search bar before continue', 1);
+        }
 
-        props.setRepos(formattedData);
-        props.setReposLoading(false);
+        const multipleSearch = inputValue.replace(',', '+');
+
+        setReposLoading(true);
+        const { data } = await fetchRepos(multipleSearch);
+        const formattedData = formatReposResponseData(data, setSelectedRepository);
+
+        setRepos(formattedData);
+        setReposLoading(false);
     };
 
     return (
         <Search
             className='search-row'
-            value={props.inputValue}
+            value={inputValue}
             onSearch={onSearchReposButtonPress}
             onChange={event => handleInputChange(event)}
-            placeholder='input search loading with enter button'
-            loading={props.reposLoading}
+            placeholder='Search github for repositories'
+            loading={reposLoading}
             enterButton
+            suffix={
+                <Tooltip title='Split text by comma to search for multiple items e.g. redux, react '>
+                    <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
+                </Tooltip>
+            }
         />
     );
 };

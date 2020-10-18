@@ -12,7 +12,7 @@ const TableComponent = (props: any) => {
 
     let searchInput: any;
 
-    const getColumnSearchProps = (dataIndex: any) => ({
+    const getColumnSearchProps = (dataIndex: string) => ({
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }: any) => (
             <div style={{ padding: 8 }}>
                 <Input
@@ -41,18 +41,18 @@ const TableComponent = (props: any) => {
                 </Space>
             </div>
         ),
-        filterIcon: (filtered: any) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-        onFilter: (value: any, record: any) =>
-            record[dataIndex] ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()) : '',
-        onFilterDropdownVisibleChange: (visible: any) => {
+        filterIcon: (filtered: boolean) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+        onFilter: (value: string | number | boolean, record: any) =>
+            record[dataIndex] ? record[dataIndex].toString().toLowerCase().includes((value as string).toLowerCase()) : '',
+        onFilterDropdownVisibleChange: (visible: boolean) => {
             if (visible) {
                 setTimeout(() => searchInput.select(), 100);
             }
         },
-        render: (text: any) => text,
+        render: (text: string) => text,
     });
 
-    const handleSearch = (selectedKeys: any, confirm: any, dataIndex: any) => {
+    const handleSearch = (selectedKeys: string, confirm: () => void, dataIndex: string) => {
         confirm();
         setState(prevState => ({
             ...prevState,
@@ -61,7 +61,7 @@ const TableComponent = (props: any) => {
         }));
     };
 
-    const handleReset = (clearFilters: any) => {
+    const handleReset = (clearFilters: () => void) => {
         clearFilters();
         setState(prevState => ({ ...prevState, searchText: '' }));
     };
