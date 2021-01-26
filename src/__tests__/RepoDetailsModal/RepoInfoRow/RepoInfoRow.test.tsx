@@ -3,30 +3,12 @@ import { configure, shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
 import Adapter from 'enzyme-adapter-react-16';
 import { RepoInfoRow } from '../../../Components/RepoDetailsModal/RepoInfoRow';
+import mockRepositoryData from "../../../__mocks__/mockRepositoryData";
 
 configure({ adapter: new Adapter() });
 
-const mock_repository_data = {
-    name: 'name',
-    description: 'some description',
-    language: 'javascript',
-    stargazers_count: 1,
-    forks: 2,
-    owner: {
-        repos_url: '',
-        type: '',
-        avatar_url: '',
-        login: '',
-    },
-    created_at: '2020:10:12',
-    updated_at: '2020:10:14',
-    license: {
-        name: 'MIT',
-    },
-};
-
 describe('RepoInfoRow', () => {
-    const wrapper: any = shallow(<RepoInfoRow repository_data={mock_repository_data} />);
+    const wrapper: any = shallow(<RepoInfoRow repository_data={mockRepositoryData} />);
 
     it('renders correctly', () => {
         const tree = renderer.create(wrapper).toJSON();

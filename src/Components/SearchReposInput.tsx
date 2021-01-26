@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Input, message, Tooltip } from 'antd';
-import { fetchRepos } from '../actions/network_actions';
+import { fetchRepos } from '../actions/networkActions';
 import { Repository } from '../Constants/types';
 import { InfoCircleOutlined } from '@ant-design/icons/lib';
 const { Search } = Input;
