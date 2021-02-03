@@ -1,4 +1,4 @@
-const mockRepositoryData = {
+module.exports = {
     name: 'name',
     description: 'some description',
     language: 'javascript',
@@ -16,5 +16,3 @@ const mockRepositoryData = {
         name: 'MIT',
     },
 };
-
-export default mockRepositoryData

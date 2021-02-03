@@ -33,8 +33,8 @@ export function App() {
                     setRepos={setRepos}
                     setSelectedRepository={setSelectedRepository}
                 />
-                <RepoDetailsModal repository_data={selectedRepository} handleOk={handleOk} handleCancel={handleCancel} />
-                <ReposDataTable repos={repos} />
+                <RepoDetailsModal  repository_data={selectedRepository} handleOk={handleOk} handleCancel={handleCancel} />
+                <ReposDataTable setSelectedRepository={setSelectedRepository} repos={repos} />
             </div>
         </div>
     );

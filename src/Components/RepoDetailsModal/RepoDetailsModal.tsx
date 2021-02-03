@@ -50,18 +50,18 @@ export const RepoDetailsModal: React.FC<RepoDetailsModalProps> = ({ repository_d
                 <p id={'repo-description'}>{repository_data.description}</p>
                 <RepoInfoRow repository_data={repository_data} />
                 <Collapse onChange={onCollapsePanelPress} style={{ marginTop: '20px' }} accordion>
-                    <Panel header={repository_data.owner.type} key='1'>
+                    <Panel header={repository_data.owner?.type} key='1'>
                         <div>
-                            <img height={'50px'} alt='avatar' className='icon' src={repository_data.owner.avatar_url} />
-                            {repository_data.owner.login}
+                            <img height={'50px'} alt='avatar' className='icon' src={repository_data.owner?.avatar_url} />
+                            {repository_data.owner?.login}
                         </div>
                     </Panel>
                     <Panel header='Repo details' key='2'>
                         <p id='created_at'>Created: {repository_data.created_at.split('T')[0]}</p>
                         <p id='updated_at'>Last change: {repository_data.updated_at.split('T')[0]}</p>
-                        {repository_data.license && <p>License: {repository_data.license.name}</p>}
+                        {repository_data.license && <p>License: {repository_data.license?.name}</p>}
                     </Panel>
-                    <Panel header={repository_data.owner.type + ' repos'} key='3'>
+                    <Panel header={repository_data.owner?.type + ' repos'} key='3'>
                         <RepoList repositories={reposData} />
                     </Panel>
                 </Collapse>

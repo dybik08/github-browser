@@ -3,6 +3,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import React from 'react';
 import 'antd/dist/antd.css';
 import CONSTANTS from '../Constants/constants'
+import {Repository} from "../Constants/types";
 
 const TableComponent = (props: any) => {
     const [state, setState] = React.useState({
@@ -100,7 +101,16 @@ const TableComponent = (props: any) => {
             render: (text: any) => text,
         },
     ];
-
+    const reposDataWithButton = props.repos && props.repos.map((repoData: Repository) => {
+        return {
+            ...repoData,
+            details: (
+                <Button type='primary' onClick={e => props.setSelectedRepository(repoData)}>
+                    Details
+                </Button>
+            ),
+        }
+    });
     return <Table pagination={{pageSize: 5}} columns={columns} dataSource={props.repos} />;
 };
 

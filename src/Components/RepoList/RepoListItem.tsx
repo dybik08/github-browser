@@ -8,7 +8,7 @@ interface RepoListItemProps {
     listItemKey: string
 }
 
-const RepoListItem: React.FC<RepoListItemProps> = ({ repository, listItemKey }) => {
+export const RepoListItem: React.FC<RepoListItemProps> = ({ repository, listItemKey }) => {
     return (
         <div key={listItemKey} className='repository-list-item-container'>
             <div className='repository-list-item-title'>{repository.name}</div>

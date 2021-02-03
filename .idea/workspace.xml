@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="488e40e8-9d41-4672-8e35-a36bc569bfe5" name="Default Changelist" comment="remove unused css code">
+    <list default="true" id="488e40e8-9d41-4672-8e35-a36bc569bfe5" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/src/__tests__/RepoListItem/RepoListItem.test.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/RepoDetailsModal/RepoDetailsModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/RepoDetailsModal/RepoDetailsModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/RepoList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/RepoList/RepoList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/SearchReposInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/SearchReposInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/RepoList/RepoListItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/RepoList/RepoListItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Table.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__mocks__/mockRepositoryData.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__mocks__/mockRepositoryData.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/__tests__/RepoDetailsModal/RepoInfoRow/RepoInfoRow.test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/RepoDetailsModal/RepoInfoRow/RepoInfoRow.test.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/network_actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/networkActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__tests__/RepoListItem/RepoListItem.test.js" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +60,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.RepoListItem.renders correctly">
+  <component name="RunManager" selected="Jest.RepoListItem">
+    <configuration name="RepoListItem (1)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/src/__tests__/RepoListItem/RepoListItem.test.js" />
+      <test-names>
+        <test-name value="RepoListItem" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <configuration name="RepoListItem" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -89,6 +101,20 @@
       </test-names>
       <method v="2" />
     </configuration>
+    <configuration name="RepoListItem.should display repo language correctly" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/__tests__/RepoListItem/RepoListItem.test.js" />
+      <test-names>
+        <test-name value="RepoListItem" />
+        <test-name value="should display repo language correctly" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
       <method v="2" />
     </configuration>
@@ -104,8 +130,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Jest.RepoListItem.renders correctly" />
         <item itemvalue="Jest.RepoListItem" />
+        <item itemvalue="Jest.RepoListItem (1)" />
+        <item itemvalue="Jest.RepoListItem.should display repo language correctly" />
+        <item itemvalue="Jest.RepoListItem.renders correctly" />
       </list>
     </recent_temporary>
   </component>
@@ -128,7 +156,11 @@
       <workItem from="1604921807374" duration="6946000" />
       <workItem from="1611506266402" duration="2291000" />
       <workItem from="1611563643461" duration="624000" />
-      <workItem from="1611686937504" duration="1432000" />
+      <workItem from="1611686937504" duration="4030000" />
+      <workItem from="1611788859104" duration="2096000" />
+      <workItem from="1611826223471" duration="14000" />
+      <workItem from="1612354225912" duration="1325000" />
+      <workItem from="1612388470688" duration="1454000" />
     </task>
     <task id="LOCAL-00001" summary="initial - a bit late but still viable">
       <created>1602805754043</created>
@@ -200,7 +232,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603062541329</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="extract repo list item">
+      <created>1611697855880</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1611697855880</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,6 +269,7 @@
     <MESSAGE value="update README file" />
     <MESSAGE value="update column name" />
     <MESSAGE value="remove unused css code" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove unused css code" />
+    <MESSAGE value="extract repo list item" />
+    <option name="LAST_COMMIT_MESSAGE" value="extract repo list item" />
   </component>
 </project>
