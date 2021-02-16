@@ -5,11 +5,18 @@ import 'antd/dist/antd.css';
 import CONSTANTS from '../Constants/constants'
 import {Repository} from "../Constants/types";
 
-const TableComponent = (props: any) => {
+const TableComponent = (props: {
+    repos: Repository[] | null,
+    setSelectedRepository: (repoData: Repository) => void
+}) => {
     const [state, setState] = React.useState({
         searchText: '',
         searchedColumn: '',
     });
+
+    if(!props.repos){
+        return null;
+    }
 
     let searchInput: any;
 
@@ -105,13 +112,15 @@ const TableComponent = (props: any) => {
         return {
             ...repoData,
             details: (
-                <Button type='primary' onClick={e => props.setSelectedRepository(repoData)}>
+                <Button type='primary' onClick={e => {
+                    props.setSelectedRepository(repoData)
+                }}>
                     Details
                 </Button>
             ),
         }
     });
-    return <Table pagination={{pageSize: 5}} columns={columns} dataSource={props.repos} />;
+    return <Table pagination={{pageSize: 5}} columns={columns} dataSource={reposDataWithButton} />;
 };
 
 export default TableComponent;

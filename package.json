@@ -56,20 +56,14 @@
     "ts-jest": "^26.4.1"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
+
     "transform": {
       "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js",
       ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css"
     },
     "transformIgnorePatterns": [
       "node_modules/(?!(antd)/)"
-    ],
-    "setupFiles": [
-      "raf/polyfill"
     ]
+
   }
 }

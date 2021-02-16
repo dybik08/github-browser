@@ -5,33 +5,31 @@ import { Repository } from '../Constants/types';
 import { InfoCircleOutlined } from '@ant-design/icons/lib';
 const { Search } = Input;
 
-const formatReposResponseData = (data: any, onButtonPressCallback: (repoData: Repository) => void) => {
+const formatReposResponseData = (data: { items: Repository[] }): Repository[] => {
     return data.items.map((repoData: Repository, index: number) => ({
         key: `${index}`,
         login: repoData.owner.login,
         language: repoData.language,
         stargazers_count: repoData.stargazers_count,
         name: repoData.name,
-        details: (
-            <Button type='primary' onClick={e => onButtonPressCallback(repoData)}>
-                Details
-            </Button>
-        ),
+        owner: repoData.owner,
+        created_at: repoData.created_at,
+        updated_at: repoData.updated_at,
+        license: repoData.license,
+        description: repoData.description,
+        forks: repoData.forks,
     }));
 };
 
 interface SearchReposInputProps {
-    setInputValue: (inputValue: string) => void;
     reposLoading: boolean;
     setReposLoading: (loading: boolean) => void;
-    inputValue: string;
-    repos: Repository[] | null;
     setRepos: (repos: Repository[]) => void;
-    setSelectedRepository: (repo: Repository) => void;
 }
 
 const SearchReposInput: React.FC<SearchReposInputProps> = props => {
-    const { setSelectedRepository, setInputValue, setReposLoading, setRepos, inputValue, reposLoading } = props;
+    const { setReposLoading, setRepos, reposLoading } = props;
+    const [inputValue, setInputValue] = React.useState<string>('');
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
@@ -42,11 +40,11 @@ const SearchReposInput: React.FC<SearchReposInputProps> = props => {
             return message.error('Please fill search bar before continue', 1);
         }
 
-        const multipleSearch = inputValue.replace(',', '+');
+        const multipleSearch = inputValue.replace('/,/g', '+');
 
         setReposLoading(true);
         const { data } = await fetchRepos(multipleSearch);
-        const formattedData = formatReposResponseData(data, setSelectedRepository);
+        const formattedData = formatReposResponseData(data);
 
         setRepos(formattedData);
         setReposLoading(false);
@@ -54,6 +52,7 @@ const SearchReposInput: React.FC<SearchReposInputProps> = props => {
 
     return (
         <Search
+            autoFocus={true}
             className='search-row'
             value={inputValue}
             onSearch={onSearchReposButtonPress}
