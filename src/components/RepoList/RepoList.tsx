@@ -1,5 +1,5 @@
 import React from 'react';
-import { Repository } from '../../Constants/types';
+import { Repository } from '../../constants/types';
 import RepoListItem from "./RepoListItem";
 
 interface RepoListProps {

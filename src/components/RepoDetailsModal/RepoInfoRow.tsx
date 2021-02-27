@@ -1,7 +1,7 @@
 import React from 'react';
 import githubLangColors from '../../github-lang-colors';
 import { GitForkIcon, StarIcon } from '@primer/octicons-react';
-import { Repository } from '../../Constants/types';
+import { Repository } from '../../constants/types';
 
 interface RepoInfoRowProps {
     repository_data: Repository;

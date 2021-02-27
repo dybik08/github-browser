@@ -2,19 +2,38 @@ import { Table, Input, Button, Space } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import React from 'react';
 import 'antd/dist/antd.css';
-import CONSTANTS from '../Constants/constants'
-import {Repository} from "../Constants/types";
+import CONSTANTS from '../constants/constants';
+import { Repository } from '../constants/types';
+import { useDispatch, useSelector } from 'react-redux';
+
+function DetailsButton(props: { onClick: () => void }) {
+    return (
+        <Button type='primary' onClick={props.onClick}>
+            Details
+        </Button>
+    );
+}
 
 const TableComponent = (props: {
-    repos: Repository[] | null,
-    setSelectedRepository: (repoData: Repository) => void
+    repos: Repository[] | null;
+    setSelectedRepository: (repoData: Repository) => void;
 }) => {
+    const repositories = useSelector(
+        (state: {
+            repositories: {
+                repos: Repository[];
+                loading: boolean;
+            };
+        }) => state.repositories
+    );
+    const dispatch = useDispatch();
+
     const [state, setState] = React.useState({
         searchText: '',
         searchedColumn: '',
     });
 
-    if(!props.repos){
+    if (!repositories.repos) {
         return null;
     }
 
@@ -51,7 +70,12 @@ const TableComponent = (props: {
         ),
         filterIcon: (filtered: boolean) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
         onFilter: (value: string | number | boolean, record: any) =>
-            record[dataIndex] ? record[dataIndex].toString().toLowerCase().includes((value as string).toLowerCase()) : '',
+            record[dataIndex]
+                ? record[dataIndex]
+                      .toString()
+                      .toLowerCase()
+                      .includes((value as string).toLowerCase())
+                : '',
         onFilterDropdownVisibleChange: (visible: boolean) => {
             if (visible) {
                 setTimeout(() => searchInput.select(), 100);
@@ -108,19 +132,21 @@ const TableComponent = (props: {
             render: (text: any) => text,
         },
     ];
-    const reposDataWithButton = props.repos && props.repos.map((repoData: Repository) => {
+
+    const reposDataWithButton = repositories.repos?.map((repoData: Repository) => {
         return {
             ...repoData,
             details: (
-                <Button type='primary' onClick={e => {
-                    props.setSelectedRepository(repoData)
-                }}>
-                    Details
-                </Button>
+                <DetailsButton
+                    onClick={() => {
+                        props.setSelectedRepository(repoData);
+                    }}
+                />
             ),
-        }
+        };
     });
-    return <Table pagination={{pageSize: 5}} columns={columns} dataSource={reposDataWithButton} />;
+
+    return <Table pagination={{ pageSize: 5 }} columns={columns} dataSource={reposDataWithButton} />;
 };
 
 export default TableComponent;

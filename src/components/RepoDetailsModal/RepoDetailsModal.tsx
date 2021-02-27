@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Modal } from 'antd';
 import { RepoIcon } from '@primer/octicons-react';
 import { Collapse } from 'antd';
-import { fetchAdditionalUserRepos } from '../../actions/networkActions';
+import { fetchAdditionalUserRepos, NetworkActionNames } from '../../actions/networkActions';
 import RepoList from '../RepoList/RepoList';
 import RepoInfoRow from './RepoInfoRow';
-import { Repository, StringMap } from '../../Constants/types';
+import { Repository, StringMap } from '../../constants/types';
+import { useDispatch, useSelector } from 'react-redux';
 
 const { Panel } = Collapse;
 
@@ -22,15 +23,21 @@ interface RepoDetailsModalProps {
 }
 
 export const RepoDetailsModal: React.FC<RepoDetailsModalProps> = ({ repository_data, handleOk, handleCancel }) => {
-    const [reposData, setReposData] = useState([]);
+    const repositories = useSelector((state: {
+        repositories: {
+            repos: Repository[],
+            loading: boolean
+        }
+    }) => state.repositories);
+    const dispatch = useDispatch();
 
     const onCollapsePanelPress = async (id: string | string[]) => {
         // on change function returns active tab ID, string[] if nested dropdowns
         const additionalUserReposSectionName = 'other_repos';
-        if (additionalUserReposSectionName === sections[id as string] && reposData.length === 0) {
+        if (additionalUserReposSectionName === sections[id as string] && repositories.repos.length === 0) {
             const additionalUserRepos =
                 repository_data && (await fetchAdditionalUserRepos(repository_data.owner.repos_url));
-            setReposData(additionalUserRepos);
+            dispatch({ type: NetworkActionNames.FETCHING_REPOS_DONE, payload: additionalUserRepos });
         }
     };
 
@@ -52,7 +59,12 @@ export const RepoDetailsModal: React.FC<RepoDetailsModalProps> = ({ repository_d
                 <Collapse onChange={onCollapsePanelPress} style={{ marginTop: '20px' }} accordion>
                     <Panel header={repository_data.owner?.type} key='1'>
                         <div>
-                            <img height={'50px'} alt='avatar' className='icon' src={repository_data.owner?.avatar_url} />
+                            <img
+                                height={'50px'}
+                                alt='avatar'
+                                className='icon'
+                                src={repository_data.owner?.avatar_url}
+                            />
                             {repository_data.owner?.login}
                         </div>
                     </Panel>
@@ -62,7 +74,7 @@ export const RepoDetailsModal: React.FC<RepoDetailsModalProps> = ({ repository_d
                         {repository_data.license && <p>License: {repository_data.license?.name}</p>}
                     </Panel>
                     <Panel header={repository_data.owner?.type + ' repos'} key='3'>
-                        <RepoList repositories={reposData} />
+                        <RepoList repositories={repositories.repos} />
                     </Panel>
                 </Collapse>
             </Modal>

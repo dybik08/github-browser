@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import './App.css';
-import ReposDataTable from './Components/Table';
-import SearchReposInput from "./Components/SearchReposInput";
-import RepoDetailsModal from "./Components/RepoDetailsModal/RepoDetailsModal";
-import {Repository} from "./Constants/types";
-
+import ReposDataTable from './components/Table';
+import SearchReposInput from "./components/SearchReposInput";
+import RepoDetailsModal from "./components/RepoDetailsModal/RepoDetailsModal";
+import {Repository} from "./constants/types";
+import { Provider } from 'react-redux'
+import store from "./reducers/store";
 
 export function App() {
     const [repos, setRepos] = React.useState<Repository[] | null>(null);
@@ -20,6 +21,7 @@ export function App() {
     };
 
     return (
+        <Provider store={store}>
         <div className='App'>
             <header className='App-header'>Github Browser</header>
             <div style={{ margin: '10px 20px' }}>
@@ -32,6 +34,7 @@ export function App() {
                 <ReposDataTable setSelectedRepository={setSelectedRepository} repos={repos} />
             </div>
         </div>
+        </Provider>
     );
 }
 

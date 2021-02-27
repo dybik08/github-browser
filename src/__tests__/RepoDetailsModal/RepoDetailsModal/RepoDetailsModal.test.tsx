@@ -1,7 +1,7 @@
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import {RepoDetailsModal} from "../../../Components/RepoDetailsModal/RepoDetailsModal";
+import {RepoDetailsModal} from "../../../components/RepoDetailsModal/RepoDetailsModal";
 
 configure({ adapter: new Adapter() });
 

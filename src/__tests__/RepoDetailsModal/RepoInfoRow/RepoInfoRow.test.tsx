@@ -2,7 +2,7 @@ import React from 'react';
 import { configure, shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
 import Adapter from 'enzyme-adapter-react-16';
-import { RepoInfoRow } from '../../../Components/RepoDetailsModal/RepoInfoRow';
+import { RepoInfoRow } from '../../../components/RepoDetailsModal/RepoInfoRow';
 import mockRepositoryData from "../../../__mocks__/mockRepositoryData";
 
 configure({ adapter: new Adapter() });
