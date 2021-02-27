@@ -1,7 +1,10 @@
 import React from 'react';
-import { configure, shallow } from 'enzyme';
+import { configure, mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import {RepoDetailsModal} from "../../../components/RepoDetailsModal/RepoDetailsModal";
+import { RepoDetailsModal } from '../../../components/RepoDetailsModal/RepoDetailsModal';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+const mockStore = configureStore();
 
 configure({ adapter: new Adapter() });
 
@@ -24,8 +27,31 @@ const mock_repository_data = {
     },
 };
 
+const initialState: any = {
+    repositories: {
+        repos: [],
+        loading: false,
+    },
+};
+
 describe('RepoDetailsModal', () => {
-    const wrapper: any = shallow(<RepoDetailsModal repository_data={mock_repository_data}  handleCancel={jest.fn()} handleOk={jest.fn()}/>);
+    let wrapper: any;
+    beforeEach(() => {
+        wrapper = mount(
+            <Provider store={mockStore(initialState)}>
+                {' '}
+                <RepoDetailsModal
+                    repository_data={mock_repository_data}
+                    handleCancel={jest.fn()}
+                    handleOk={jest.fn()}
+                />
+            </Provider>
+        );
+    });
+
+    afterEach(() => {
+        wrapper.unmount();
+    });
 
     it('render correct repo-description', () => {
         const repo_description = wrapper.find({ id: 'repo-description' }).text();
@@ -33,7 +59,10 @@ describe('RepoDetailsModal', () => {
     });
 
     it('render correct created_at', () => {
-        const created_at = wrapper.find({ id: 'created_at' }).text();
+        const created_at = wrapper.findWhere( (node: any) => {
+            console.log('node: ', node.props());
+            return node.props().repository_data?.created_at === '2020:10:12'
+        } )[0].text();
         expect(created_at).toBe('Created: ' + mock_repository_data.created_at);
     });
 

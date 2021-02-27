@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal } from 'antd';
 import { RepoIcon } from '@primer/octicons-react';
-import { Collapse } from 'antd';
 import { fetchAdditionalUserRepos, NetworkActionNames } from '../../actions/networkActions';
 import RepoList from '../RepoList/RepoList';
 import RepoInfoRow from './RepoInfoRow';
 import { Repository, StringMap } from '../../constants/types';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { Collapse } from 'antd';
 const { Panel } = Collapse;
 
 const sections: StringMap = {
@@ -23,12 +22,14 @@ interface RepoDetailsModalProps {
 }
 
 export const RepoDetailsModal: React.FC<RepoDetailsModalProps> = ({ repository_data, handleOk, handleCancel }) => {
-    const repositories = useSelector((state: {
-        repositories: {
-            repos: Repository[],
-            loading: boolean
-        }
-    }) => state.repositories);
+    const repositories = useSelector(
+        (state: {
+            repositories: {
+                repos: Repository[];
+                loading: boolean;
+            };
+        }) => state.repositories
+    );
     const dispatch = useDispatch();
 
     const onCollapsePanelPress = async (id: string | string[]) => {

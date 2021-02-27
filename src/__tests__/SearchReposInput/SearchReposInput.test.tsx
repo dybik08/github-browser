@@ -79,13 +79,13 @@ describe('RepoListItem', () => {
     useStateSpy.mockImplementation((init: any) => [init, setState]);
     let wrapper: any;
 
+    beforeEach(() => {
+        wrapper = mount(<SearchReposInput reposLoading={false} setRepos={jest.fn()} setReposLoading={jest.fn()} />);
+    });
+
     afterEach(() => {
         wrapper.unmount();
         jest.clearAllMocks();
-    });
-
-    beforeEach(() => {
-        wrapper = mount(<SearchReposInput reposLoading={false} setRepos={jest.fn()} setReposLoading={jest.fn()} />);
     });
 
     it('renders correctly', () => {
@@ -95,7 +95,7 @@ describe('RepoListItem', () => {
 
     it('should update state on input change', () => {
         const newInputValue = 'React is Awesome';
-        wrapper.find('.search-row').simulate('change', { target: { value: newInputValue } });
+        wrapper.find('.ant-input').simulate('change', { target: { value: newInputValue } });
         expect(setState).toHaveBeenCalledWith(newInputValue);
     });
 
