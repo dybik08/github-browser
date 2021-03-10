@@ -10,6 +10,7 @@ export interface RepositoryOwner {
 }
 
 export interface Repository {
+    id: number;
     name: string;
     description: string;
     language: string;
@@ -19,6 +20,6 @@ export interface Repository {
     created_at: string;
     updated_at: string;
     license: {
-        name: string
+        name: string;
     };
 }

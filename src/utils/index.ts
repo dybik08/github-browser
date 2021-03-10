@@ -1,7 +1,8 @@
-import {Repository} from "../constants/types";
+import { Repository } from '../constants/types';
 
 export const formatReposResponseData = (data: { items: Repository[] }): Repository[] => {
     return data.items.map((repoData: Repository, index: number) => ({
+        id: repoData.id,
         key: `${index}`,
         login: repoData.owner.login,
         language: repoData.language,

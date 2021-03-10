@@ -1,12 +1,14 @@
 import React from 'react';
 import { Modal } from 'antd';
-import { RepoIcon } from '@primer/octicons-react';
+import { RepoIcon, HeartFillIcon } from '@primer/octicons-react';
 import { fetchAdditionalUserRepos, NetworkActionNames } from '../../actions/networkActions';
 import RepoList from '../RepoList/RepoList';
 import RepoInfoRow from './RepoInfoRow';
 import { Repository, StringMap } from '../../constants/types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Collapse } from 'antd';
+import { addRepositoryToFavourites, removeRepositoryFromFavourites } from '../../actions/favouritesActions';
+import { FavouritesReducer } from '../../reducers/favouritesReducer';
 const { Panel } = Collapse;
 
 const sections: StringMap = {
@@ -30,7 +32,14 @@ export const RepoDetailsModal: React.FC<RepoDetailsModalProps> = ({ repository_d
             };
         }) => state.repositories
     );
+
+    const favourites = useSelector((state: { favourites: FavouritesReducer }) => state.favourites);
+
     const dispatch = useDispatch();
+
+    if (!repository_data) {
+        return null;
+    }
 
     const onCollapsePanelPress = async (id: string | string[]) => {
         // on change function returns active tab ID, string[] if nested dropdowns
@@ -40,6 +49,16 @@ export const RepoDetailsModal: React.FC<RepoDetailsModalProps> = ({ repository_d
                 repository_data && (await fetchAdditionalUserRepos(repository_data.owner.repos_url));
             dispatch({ type: NetworkActionNames.FETCHING_REPOS_DONE, payload: additionalUserRepos });
         }
+    };
+
+    const onFavouritesIconClick = () => {
+        const doesRepoExistInFavourites = favourites.find(repo => repo.id === repository_data.id);
+
+        return dispatch(
+            doesRepoExistInFavourites
+                ? removeRepositoryFromFavourites(repository_data)
+                : addRepositoryToFavourites(repository_data)
+        );
     };
 
     return (
@@ -52,9 +71,14 @@ export const RepoDetailsModal: React.FC<RepoDetailsModalProps> = ({ repository_d
                 onOk={handleOk}
                 onCancel={handleCancel}
             >
-                <p>
-                    <RepoIcon /> {repository_data.name}
-                </p>
+                <div className={'repo-icon-row'}>
+                    <p>
+                        <RepoIcon /> {repository_data.name}
+                    </p>
+                    <button onClick={onFavouritesIconClick}>
+                        <HeartFillIcon />
+                    </button>
+                </div>
                 <p id={'repo-description'}>{repository_data.description}</p>
                 <RepoInfoRow repository_data={repository_data} />
                 <Collapse onChange={onCollapsePanelPress} style={{ marginTop: '20px' }} accordion>

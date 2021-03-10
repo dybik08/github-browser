@@ -9,6 +9,7 @@ export const repositoriesReducerInitialState = {
 export const repositoriesResponseHandler = (repositories: Repository[]): Repository[] => {
     return repositories.map((repo: Repository, index: number) => {
         return {
+            id: repo.id,
             key: `${index}`,
             login: repo.owner.login,
             language: repo.language,

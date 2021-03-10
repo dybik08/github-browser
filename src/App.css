@@ -66,3 +66,10 @@
   max-width: 50%;
   align-items: center;
 }
+
+.repo-icon-row {
+  display: flex;
+  flex-direction: row;
+  vertical-align: center;
+  justify-content: space-between;
+}
