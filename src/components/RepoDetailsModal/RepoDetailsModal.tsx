@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Modal } from 'antd';
-import { RepoIcon, HeartFillIcon } from '@primer/octicons-react';
+import { RepoIcon, HeartFillIcon, HeartIcon } from '@primer/octicons-react';
 import { fetchAdditionalUserRepos, NetworkActionNames } from '../../actions/networkActions';
 import RepoList from '../RepoList/RepoList';
 import RepoInfoRow from './RepoInfoRow';
@@ -40,6 +40,7 @@ export const RepoDetailsModal: React.FC<RepoDetailsModalProps> = ({ repository_d
     if (!repository_data) {
         return null;
     }
+    const doesRepoExistInFavourites = favourites.find(repo => repo.id === repository_data.id);
 
     const onCollapsePanelPress = async (id: string | string[]) => {
         // on change function returns active tab ID, string[] if nested dropdowns
@@ -52,8 +53,6 @@ export const RepoDetailsModal: React.FC<RepoDetailsModalProps> = ({ repository_d
     };
 
     const onFavouritesIconClick = () => {
-        const doesRepoExistInFavourites = favourites.find(repo => repo.id === repository_data.id);
-
         return dispatch(
             doesRepoExistInFavourites
                 ? removeRepositoryFromFavourites(repository_data)
@@ -76,7 +75,7 @@ export const RepoDetailsModal: React.FC<RepoDetailsModalProps> = ({ repository_d
                         <RepoIcon /> {repository_data.name}
                     </p>
                     <button onClick={onFavouritesIconClick}>
-                        <HeartFillIcon />
+                        {doesRepoExistInFavourites ? <HeartFillIcon /> : <HeartIcon />}
                     </button>
                 </div>
                 <p id={'repo-description'}>{repository_data.description}</p>
