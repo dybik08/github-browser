@@ -33,11 +33,13 @@ export function App() {
                             setReposLoading={setReposLoading}
                             setRepos={setRepos}
                         />
-                        <RepoDetailsModal
-                            repository_data={selectedRepository}
-                            handleOk={handleOk}
-                            handleCancel={handleCancel}
-                        />
+                        {selectedRepository && (
+                            <RepoDetailsModal
+                                repository_data={selectedRepository}
+                                handleOk={handleOk}
+                                handleCancel={handleCancel}
+                            />
+                        )}
                         <ReposDataTable setSelectedRepository={setSelectedRepository} repos={repos} />
                     </div>
                 </div>

@@ -16,8 +16,8 @@ export const repositoriesResponseHandler = (repositories: Repository[]): Reposit
             stargazers_count: repo.stargazers_count,
             name: repo.name,
             owner: repo.owner,
-            created_at: repo.created_at,
-            updated_at: repo.updated_at,
+            created_at: new Date(repo.created_at).toString(),
+            updated_at: new Date(repo.updated_at).toString(),
             license: repo.license,
             description: repo.description,
             forks: repo.forks,
@@ -25,15 +25,15 @@ export const repositoriesResponseHandler = (repositories: Repository[]): Reposit
     });
 };
 
-interface RepositoriesReducer {
+export interface RepositoriesState {
     repos: Repository[];
     loading: boolean;
 }
 
 export const repositories = (
-    state: RepositoriesReducer = repositoriesReducerInitialState,
+    state: RepositoriesState = repositoriesReducerInitialState,
     action: { type: string; payload: any }
-): RepositoriesReducer => {
+): RepositoriesState => {
     switch (action.type) {
         case NetworkActionNames.FETCH_REPOS:
             return state;

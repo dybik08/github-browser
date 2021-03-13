@@ -1,14 +1,13 @@
 import { FavouritesActions } from '../actions/favouritesActions';
 import { Repository } from '../constants/types';
-import _ from 'lodash';
-export type FavouritesReducer = Repository[];
+export type FavouritesState = Repository[];
 
-const favouritesReducerInitialState: FavouritesReducer = [];
+const favouritesReducerInitialState: FavouritesState = [];
 
 export const favourites = (
-    state: FavouritesReducer = favouritesReducerInitialState,
+    state: FavouritesState = favouritesReducerInitialState,
     action: { type: string; payload: any }
-): FavouritesReducer => {
+): FavouritesState => {
     switch (action.type) {
         case FavouritesActions.ADD_TO_FAVOURITE:
             return [...state, action.payload];
