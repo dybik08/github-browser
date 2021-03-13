@@ -4,17 +4,38 @@ import ReposDataTable from './components/Table';
 import SearchReposInput from './components/SearchReposInput';
 import RepoDetailsModal from './components/RepoDetailsModal/RepoDetailsModal';
 import { Repository } from './constants/types';
-import { Provider, useSelector } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import configuredStore from './reducers/store';
 import { PersistGate } from 'redux-persist/integration/react';
-import RepoList from './components/RepoList/RepoList';
 import { AppState } from './reducers';
 import { FavouritesState } from './reducers/favouritesReducer';
-import { HeartFillIcon } from '@primer/octicons-react';
+import { HeartFillIcon, XCircleIcon } from '@primer/octicons-react';
+import { removeRepositoryFromFavourites } from './actions/favouritesActions';
+import RepoListItem from './components/RepoList/RepoListItem';
 const { store, persistor } = configuredStore;
 
 function FavouritesContainer() {
     const favourites = useSelector<AppState, FavouritesState>(state => state.favourites);
+    const dispatch = useDispatch();
+
+    const onFavouritesIconClick = (repository_data: Repository) => {
+        return dispatch(removeRepositoryFromFavourites(repository_data));
+    };
+
+    const favouriteRepos = favourites.map((repository: Repository, index: number) => {
+        return (
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                <RepoListItem
+                    repoListItemStyle={{ flex: 9 }}
+                    listItemKey={repository.name + index}
+                    repository={repository}
+                />
+                <button style={{ flex: 1 }} onClick={() => onFavouritesIconClick(repository)}>
+                    <XCircleIcon size={20} />
+                </button>
+            </div>
+        );
+    });
 
     return (
         <div style={{ flex: 2 }}>
@@ -29,7 +50,7 @@ function FavouritesContainer() {
                 <p className={'favourites'}>Your favourite repos</p>
                 <HeartFillIcon />
             </div>
-            <RepoList repositories={favourites} />
+            {favouriteRepos}
         </div>
     );
 }
