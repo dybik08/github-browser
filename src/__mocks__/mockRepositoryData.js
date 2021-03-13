@@ -1,4 +1,5 @@
 module.exports = {
+    id: 12,
     name: 'name',
     description: 'some description',
     language: 'javascript',

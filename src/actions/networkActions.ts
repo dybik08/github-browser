@@ -1,5 +1,6 @@
 import axios from 'axios';
 import API from '../constants/API';
+import { AppDispatch } from '../reducers/store';
 
 export enum NetworkActionNames {
     FETCH_REPOS = 'FETCH_REPOS',
@@ -9,10 +10,10 @@ export enum NetworkActionNames {
     START_FETCHING_REPOS = 'START_FETCHING_REPOS',
 }
 
-export const fetchRepos = (query: string) => {
-    return (dispatch: any) => {
+export const fetchRepos = (query: string): ((dispatch: AppDispatch) => void) => {
+    return dispatch => {
         dispatch({ type: NetworkActionNames.START_FETCHING_REPOS });
-        axios
+        return axios
             .get(API.endpoints.search_repos(query))
             .then(res => {
                 dispatch({ type: NetworkActionNames.FETCHING_REPOS_DONE, payload: res.data.items });

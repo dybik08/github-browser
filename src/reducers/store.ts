@@ -13,8 +13,11 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, AppReducer);
 
+let store = createStore(persistedReducer, applyMiddleware(thunk, logger));
+
+export type AppDispatch = typeof store.dispatch;
+
 const configureRedux = () => {
-    let store = createStore(persistedReducer, applyMiddleware(thunk, logger));
     // @ts-ignore for now before I figure out why persist store has type mismatch
     let persistor = persistStore(store);
     return { store, persistor };

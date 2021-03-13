@@ -59,10 +59,11 @@ describe('RepoDetailsModal', () => {
     });
 
     it('render correct created_at', () => {
-        const created_at = wrapper.findWhere( (node: any) => {
-            console.log('node: ', node.props());
-            return node.props().repository_data?.created_at === '2020:10:12'
-        } )[0].text();
+        const created_at = wrapper
+            .findWhere((node: any) => {
+                return node.props().repository_data?.created_at === '2020:10:12';
+            })[0]
+            .text();
         expect(created_at).toBe('Created: ' + mock_repository_data.created_at);
     });
 
