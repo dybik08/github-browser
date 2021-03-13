@@ -22,4 +22,16 @@ export interface Repository {
     license: {
         name: string;
     };
+    archive_url?: string;
+    assignees_url?: string;
+    blobs_url?: string;
+    branches_url?: string;
+    clone_url?: string;
+    collaborators_url?: string;
+    comments_url?: string;
+    commits_url?: string;
+    compare_url?: string;
+    contents_url?: string;
+    contributors_url?: string;
+    default_branch?: string;
 }
