@@ -85,6 +85,6 @@ describe('RepoListItem', () => {
 
         wrapper.find('.ant-btn').simulate('click');
         expect(setState).toHaveBeenCalledWith('React');
-        expect(mockDispatch).toHaveBeenCalled();
+        expect(networkActions.fetchRepos).toHaveBeenCalled();
     });
 });
