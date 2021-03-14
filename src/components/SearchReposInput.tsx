@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, message, Tooltip } from 'antd';
+import { Button, Input, message, Tooltip } from 'antd';
 import { fetchRepos } from '../actions/networkActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Repository } from '../constants/types';
@@ -15,15 +15,20 @@ interface SearchReposInputProps {
 }
 
 const SearchReposInput: React.FC<SearchReposInputProps> = props => {
+    const [inputValue, setInputValue] = React.useState<string>('');
     const repositories = useSelector<AppState, RepositoriesState>(state => state.repositories);
     const dispatch = useDispatch();
 
-    const onSearchReposButtonPress = async (searchText: string) => {
-        if (searchText.length === 0) {
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(event.target.value);
+    };
+
+    const onSearchReposButtonPress = async () => {
+        if (inputValue.length === 0) {
             return message.error('Please fill search bar before continue', 1);
         }
 
-        const handleMultipleSearch = searchText.replace('/,/g', '+');
+        const handleMultipleSearch = inputValue.replace('/,/g', '+');
 
         dispatch(fetchRepos(handleMultipleSearch));
     };
@@ -32,7 +37,9 @@ const SearchReposInput: React.FC<SearchReposInputProps> = props => {
         <Search
             autoFocus={true}
             className='search-row'
+            value={inputValue}
             onSearch={onSearchReposButtonPress}
+            onChange={event => handleInputChange(event)}
             placeholder='Search github for repositories'
             loading={repositories.loading}
             enterButton

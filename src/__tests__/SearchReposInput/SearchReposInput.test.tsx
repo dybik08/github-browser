@@ -39,8 +39,8 @@ jest.mock('../../actions/networkActions', () => ({
     }),
 }));
 
-jest.mock('../../utils', () => ({
-    formatReposResponseData: jest.fn(),
+jest.mock('../../utils/networkUtils', () => ({
+    repositoriesResponseHandler: jest.fn(),
 }));
 
 configure({ adapter: new Adapter() });
@@ -67,16 +67,24 @@ describe('RepoListItem', () => {
         expect(tree).toMatchSnapshot();
     });
 
+    it('should update state on input change', () => {
+        const newInputValue = 'React is Awesome';
+        wrapper.find('.ant-input').simulate('change', { target: { value: newInputValue } });
+        expect(setState).toHaveBeenCalledWith(newInputValue);
+    });
+
     it('should call onSearchReposButtonPress correctly', () => {
         const setReposLoadingMock = jest.fn();
         const setReposMock = jest.fn();
         // @ts-ignore
+        useStateSpy.mockImplementation(init => ['repository', setState]);
         wrapper = mount(
             <SearchReposInput reposLoading={false} setRepos={setReposMock} setReposLoading={setReposLoadingMock} />
         );
         wrapper.find('.ant-input').simulate('change', { target: { value: 'React' } });
-        wrapper.find('.ant-btn').simulate('click');
 
-        expect(networkActions.fetchRepos).toHaveBeenCalledWith('React');
+        wrapper.find('.ant-btn').simulate('click');
+        expect(setState).toHaveBeenCalledWith('React');
+        expect(mockDispatch).toHaveBeenCalled();
     });
 });

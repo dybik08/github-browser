@@ -15,6 +15,7 @@ import RepoListItem from './components/RepoList/RepoListItem';
 const { store, persistor } = configuredStore;
 
 function FavouritesContainer() {
+    // use state to temporary keep favourite even if user removed it
     const favourites = useSelector<AppState, FavouritesState>(state => state.favourites);
     const dispatch = useDispatch();
 
