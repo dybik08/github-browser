@@ -1,23 +1,13 @@
 import React, { useEffect } from 'react';
 import { Modal } from 'antd';
-import { RepoIcon, HeartFillIcon, HeartIcon } from '@primer/octicons-react';
-import { fetchAdditionalUserRepos, NetworkActionNames } from '../../actions/networkActions';
+import { RepoIcon } from '@primer/octicons-react';
+import { fetchAdditionalUserRepos } from '../../actions/networkActions';
 import RepoList from '../RepoList/RepoList';
 import RepoInfoRow from './RepoInfoRow';
-import { Repository, StringMap } from '../../constants/types';
-import { useDispatch, useSelector } from 'react-redux';
+import { Repository } from '../../constants/types';
 import { Collapse } from 'antd';
-import { addRepositoryToFavourites, removeRepositoryFromFavourites } from '../../actions/favouritesActions';
-import { FavouritesState } from '../../reducers/favouritesReducer';
-import { RepositoriesState } from '../../reducers/repositoriesReducer';
-import { AppState } from '../../reducers';
+import { FavouritesIcon } from '../Favourites/FavouritesIcon';
 const { Panel } = Collapse;
-
-const sections: StringMap = {
-    '1': 'owner_type',
-    '2': 'repo_details',
-    '3': 'other_repos',
-};
 
 interface RepoDetailsModalProps {
     repository_data: Repository;
@@ -26,30 +16,15 @@ interface RepoDetailsModalProps {
 }
 
 export const RepoDetailsModal: React.FC<RepoDetailsModalProps> = ({ repository_data, handleOk, handleCancel }) => {
-    const repositories = useSelector<AppState, RepositoriesState>(state => state.repositories);
+    const [additionalUserRepos, setAdditionalUserRepos] = React.useState<Repository[]>([]);
 
-    const favourites = useSelector<AppState, FavouritesState>(state => state.favourites);
-
-    const dispatch = useDispatch();
-
-    const doesRepoExistInFavourites = favourites.find(repo => repo.id === repository_data.id);
-
-    const onCollapsePanelPress = async (id: string | string[]) => {
-        // on change function returns active tab ID, string[] if nested dropdowns
-        const additionalUserReposSectionName = 'other_repos';
-        if (additionalUserReposSectionName === sections[id as string] && repositories.repos.length === 0) {
-            const additionalUserRepos = await fetchAdditionalUserRepos(repository_data.owner.repos_url);
-            dispatch({ type: NetworkActionNames.FETCHING_REPOS_DONE, payload: additionalUserRepos });
+    useEffect(() => {
+        if (additionalUserRepos.length === 0) {
+            fetchAdditionalUserRepos(repository_data.owner.repos_url).then(additionalUserRepos => {
+                setAdditionalUserRepos(additionalUserRepos);
+            });
         }
-    };
-
-    const onFavouritesIconClick = () => {
-        return dispatch(
-            doesRepoExistInFavourites
-                ? removeRepositoryFromFavourites(repository_data)
-                : addRepositoryToFavourites(repository_data)
-        );
-    };
+    }, [additionalUserRepos]);
 
     return (
         <Modal
@@ -64,13 +39,11 @@ export const RepoDetailsModal: React.FC<RepoDetailsModalProps> = ({ repository_d
                 <p>
                     <RepoIcon /> {repository_data.name}
                 </p>
-                <button onClick={onFavouritesIconClick}>
-                    {doesRepoExistInFavourites ? <HeartFillIcon /> : <HeartIcon />}
-                </button>
+                <FavouritesIcon repository={repository_data} />
             </div>
             <p id={'repo-description'}>{repository_data.description}</p>
             <RepoInfoRow repository_data={repository_data} />
-            <Collapse onChange={onCollapsePanelPress} style={{ marginTop: '20px' }} accordion>
+            <Collapse style={{ marginTop: '20px' }} accordion>
                 <Panel header={repository_data.owner?.type} key='1'>
                     <div>
                         <img height={'50px'} alt='avatar' className='icon' src={repository_data.owner?.avatar_url} />
@@ -83,7 +56,7 @@ export const RepoDetailsModal: React.FC<RepoDetailsModalProps> = ({ repository_d
                     {repository_data.license && <p>License: {repository_data.license?.name}</p>}
                 </Panel>
                 <Panel header={repository_data.owner?.type + ' repos'} key='3'>
-                    <RepoList repositories={repositories.repos} />
+                    <RepoList repositories={additionalUserRepos} />
                 </Panel>
             </Collapse>
         </Modal>
