@@ -2,19 +2,12 @@ import React from 'react';
 import { Button, Input, message, Tooltip } from 'antd';
 import { fetchRepos } from '../actions/networkActions';
 import { useDispatch, useSelector } from 'react-redux';
-import { Repository } from '../constants/types';
 import { InfoCircleOutlined } from '@ant-design/icons/lib';
 import { AppState } from '../reducers';
 import { RepositoriesState } from '../reducers/repositoriesReducer';
 const { Search } = Input;
 
-interface SearchReposInputProps {
-    reposLoading: boolean;
-    setReposLoading: (loading: boolean) => void;
-    setRepos: (repos: Repository[]) => void;
-}
-
-const SearchReposInput: React.FC<SearchReposInputProps> = props => {
+const SearchReposInput = () => {
     const [inputValue, setInputValue] = React.useState<string>('');
     const repositories = useSelector<AppState, RepositoriesState>(state => state.repositories);
     const dispatch = useDispatch();

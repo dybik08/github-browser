@@ -5,6 +5,8 @@ import 'antd/dist/antd.css';
 import CONSTANTS from '../constants/constants';
 import { Repository } from '../constants/types';
 import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '../reducers';
+import { RepositoriesState } from '../reducers/repositoriesReducer';
 
 function DetailsButton(props: { onClick: () => void }) {
     return (
@@ -14,11 +16,8 @@ function DetailsButton(props: { onClick: () => void }) {
     );
 }
 
-const TableComponent = (props: {
-    repos: Repository[] | null;
-    setSelectedRepository: (repoData: Repository) => void;
-}) => {
-    const repositories = useSelector(
+const TableComponent = (props: { setSelectedRepository: (repoData: Repository) => void }) => {
+    const repositories = useSelector<AppState, RepositoriesState>(
         (state: {
             repositories: {
                 repos: Repository[];
@@ -26,7 +25,6 @@ const TableComponent = (props: {
             };
         }) => state.repositories
     );
-    const dispatch = useDispatch();
 
     const [state, setState] = React.useState({
         searchText: '',
