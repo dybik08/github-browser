@@ -9,7 +9,7 @@ import React from 'react';
 export function FavouritesIcon(props: { repository: Repository }) {
     const favourites = useSelector<AppState, FavouritesState>(state => state.favourites);
     const dispatch = useDispatch();
-
+        
     const doesRepoExistInFavourites = favourites.find(repo => repo.id === props.repository.id);
 
     const onFavouritesIconClick = () => {

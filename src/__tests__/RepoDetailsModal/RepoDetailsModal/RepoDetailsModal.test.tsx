@@ -4,9 +4,14 @@ import Adapter from 'enzyme-adapter-react-16';
 import { RepoDetailsModal } from '../../../components/RepoDetailsModal/RepoDetailsModal';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
+import * as networkActions from '../../../actions/networkActions';
 const mockStore = configureStore();
 
 configure({ adapter: new Adapter() });
+
+const mockFetchAdditionalUserReposResponse = ['repo1', 'repo2', 'repo3'];
+const mockFetchAdditionalUserRepos = jest.fn().mockResolvedValue(mockFetchAdditionalUserReposResponse);
+networkActions.fetchAdditionalUserRepos = mockFetchAdditionalUserRepos;
 
 const mock_repository_data = {
     name: 'name',
@@ -15,7 +20,7 @@ const mock_repository_data = {
     stargazers_count: 1,
     forks: 2,
     owner: {
-        repos_url: '',
+        repos_url: 'repos_url',
         type: '',
         avatar_url: '',
         login: '',
@@ -32,10 +37,15 @@ const initialState: any = {
         repos: [],
         loading: false,
     },
+    favourites: [],
 };
 
 describe('RepoDetailsModal', () => {
     let wrapper: any;
+    const setState = jest.fn();
+    const useStateSpy = jest.spyOn(React, 'useState');
+    useStateSpy.mockImplementation((init: any) => [init, setState]);
+
     beforeEach(() => {
         wrapper = mount(
             <Provider store={mockStore(initialState)}>
@@ -51,6 +61,7 @@ describe('RepoDetailsModal', () => {
 
     afterEach(() => {
         wrapper.unmount();
+        jest.clearAllMocks();
     });
 
     it('render correct repo-description', () => {
@@ -58,17 +69,8 @@ describe('RepoDetailsModal', () => {
         expect(repo_description).toBe(mock_repository_data.description);
     });
 
-    it('render correct created_at', () => {
-        const created_at = wrapper
-            .findWhere((node: any) => {
-                return node.props().repository_data?.created_at === '2020:10:12';
-            })[0]
-            .text();
-        expect(created_at).toBe('Created: ' + mock_repository_data.created_at);
-    });
-
-    it('render correct updated_at', () => {
-        const updated_at = wrapper.find({ id: 'updated_at' }).text();
-        expect(updated_at).toBe('Last change: ' + mock_repository_data.updated_at);
+    it('fetch additional user repos on mount', () => {
+        expect(mockFetchAdditionalUserRepos).toHaveBeenCalledWith('repos_url');
+        expect(setState).toHaveBeenCalledWith(mockFetchAdditionalUserReposResponse);
     });
 });
