@@ -31,7 +31,7 @@ export const RepoDetailsModal: React.FC<RepoDetailsModalProps> = ({ repository_d
             width={window.innerWidth * 0.7}
             okButtonProps={{ style: { display: 'none' } }}
             title={repository_data.name.toUpperCase()}
-            visible={repository_data !== null}
+            visible={true}
             onOk={handleOk}
             onCancel={handleCancel}
         >

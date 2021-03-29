@@ -8,6 +8,7 @@ import * as networkActions from '../../actions/networkActions';
 const mockDispatch = jest.fn();
 jest.mock('react-redux', () => ({
     useSelector: jest.fn().mockReturnValue({
+        // useSelector will return redux state object
         repositories: {
             loading: false,
             repos: [],
@@ -49,8 +50,7 @@ describe('RepoListItem', () => {
     const setState = jest.fn();
     const useStateSpy = jest.spyOn(React, 'useState');
 
-    // @ts-ignore
-    useStateSpy.mockImplementation((init: any) => [init, setState]);
+    useStateSpy.mockImplementation(init => [init, setState]);
     let wrapper: any;
 
     beforeEach(() => {

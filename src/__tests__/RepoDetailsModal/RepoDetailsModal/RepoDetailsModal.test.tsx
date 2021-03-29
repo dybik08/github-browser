@@ -30,6 +30,7 @@ const mock_repository_data = {
     license: {
         name: 'MIT',
     },
+    id: 20,
 };
 
 const initialState: any = {
@@ -42,9 +43,10 @@ const initialState: any = {
 
 describe('RepoDetailsModal', () => {
     let wrapper: any;
+
     const setState = jest.fn();
     const useStateSpy = jest.spyOn(React, 'useState');
-    useStateSpy.mockImplementation((init: any) => [init, setState]);
+    useStateSpy.mockImplementation(init => [init, setState]);
 
     beforeEach(() => {
         wrapper = mount(

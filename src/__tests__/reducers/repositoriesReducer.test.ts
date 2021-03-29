@@ -4,12 +4,7 @@ import mockedRepository from '../../__mocks__/mockRepositoryData';
 
 describe('repositories reducer tests', () => {
     it('should return initial state', () => {
-        expect(
-            repositories(undefined, {
-                type: 'NON_EXISTING_ACTION',
-                payload: undefined,
-            })
-        ).toEqual(repositoriesReducerInitialState);
+        expect(repositories(undefined, {})).toEqual(repositoriesReducerInitialState);
     });
 
     it('should handle START_FETCHING_REPOS action', () => {

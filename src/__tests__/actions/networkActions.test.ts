@@ -13,18 +13,19 @@ describe('network actions testing', () => {
         jest.resetAllMocks();
     });
 
-    it('Should call START_FETCHING_REPOS & FETCHING_REPOS_DONE', () => {
+    it('Should call START_FETCHING_REPOS & FETCHING_REPOS_DONE - if no network errors', () => {
         const mockedGet = jest.fn().mockResolvedValue({ data: { items: [mockedRepository, mockedRepository] } });
         axios.get = mockedGet;
+
         const expectedActions = [
             {
                 type: NetworkActionNames.START_FETCHING_REPOS,
             },
             { type: NetworkActionNames.FETCHING_REPOS_DONE, payload: [mockedRepository, mockedRepository] },
         ];
+
         const store = mockStore([]);
         return store.dispatch<any>(fetchRepos('React')).then(() => {
-            // return of async actions
             expect(mockedGet).toHaveBeenCalled();
 
             expect(store.getActions()).toEqual(expectedActions);
