@@ -38,7 +38,9 @@ export function App() {
                             <ReposDataTable setSelectedRepository={setSelectedRepository} />
                         </div>
                         <FavouritesContainer />
-                        <a href={'https://competent-visvesvaraya-333a41.netlify.app/mobile-app'}>link to mobile app</a>
+                        <a href={'https://competent-visvesvaraya-333a41.netlify.app/mobile-app'}>
+                            link to mobile app without token
+                        </a>
                     </div>
                 </div>
             </PersistGate>
