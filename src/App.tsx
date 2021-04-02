@@ -38,7 +38,13 @@ export function App() {
                             <ReposDataTable setSelectedRepository={setSelectedRepository} />
                         </div>
                         <FavouritesContainer />
-                        <a href={'https://competent-visvesvaraya-333a41.netlify.app/mobile-app'}>link to mobile app</a>
+                        <a
+                            href={
+                                'trapp://?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJydW5faWQiOjY3NjkxLCJkcml2ZXJfaWQiOjEyODkzLCJzY2VuYXJpb19pZCI6NzEwNiwid3NfdG9rZW4iOiI0YmEzODI5Ni04ODQyLTRhZGMtYjIxYi1iYjQ2YjFkNzcwZDEiLCJvcmdhbmlzYXRpb25faWQiOjgsImFsbF9jaGlsZF9pZHMiOls4LDU0LDU2LDU3LDU4LDU5LDYwLDYxXX0.xoGLWXTUw_sijbX4SzCdke3tsGtbMUA6S_VfmU6I1wo'
+                            }
+                        >
+                            link to mobile app with token
+                        </a>
                     </div>
                 </div>
             </PersistGate>
