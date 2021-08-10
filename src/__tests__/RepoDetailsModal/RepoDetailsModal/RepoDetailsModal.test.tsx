@@ -1,5 +1,5 @@
 import React from 'react';
-import { configure, mount, shallow } from 'enzyme';
+import { configure, mount, ReactWrapper, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { RepoDetailsModal } from '../../../components/RepoDetailsModal/RepoDetailsModal';
 import { Provider } from 'react-redux';
@@ -42,7 +42,7 @@ const initialState: any = {
 };
 
 describe('RepoDetailsModal', () => {
-    let wrapper: any;
+    let wrapper: ReactWrapper;
 
     const setState = jest.fn();
     const useStateSpy = jest.spyOn(React, 'useState');
