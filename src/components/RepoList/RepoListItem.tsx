@@ -2,9 +2,10 @@ import githubLangColors from '../../github-lang-colors';
 import { GitForkIcon, StarIcon } from '@primer/octicons-react';
 import React from 'react';
 import { Repository } from '../../constants/types';
+import { IRepositoryDto } from '../../modules/API/Repository/RepositoryApi.interface';
 
 interface RepoListItemProps {
-    repository: Repository;
+    repository: IRepositoryDto;
     listItemKey: string;
     repoListItemStyle?: any;
 }

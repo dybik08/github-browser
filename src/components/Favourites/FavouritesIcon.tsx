@@ -5,11 +5,12 @@ import { FavouritesState } from '../../reducers/favouritesReducer';
 import { addRepositoryToFavourites, removeRepositoryFromFavourites } from '../../actions/favouritesActions';
 import { HeartFillIcon, HeartIcon } from '@primer/octicons-react';
 import React from 'react';
+import { IRepositoryDto } from '../../modules/API/Repository/RepositoryApi.interface';
 
-export function FavouritesIcon(props: { repository: Repository }) {
+export function FavouritesIcon(props: { repository: IRepositoryDto }) {
     const favourites = useSelector<AppState, FavouritesState>(state => state.favourites);
     const dispatch = useDispatch();
-        
+
     const doesRepoExistInFavourites = favourites.find(repo => repo.id === props.repository.id);
 
     const onFavouritesIconClick = () => {

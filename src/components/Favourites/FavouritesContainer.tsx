@@ -6,16 +6,17 @@ import { removeRepositoryFromFavourites } from '../../actions/favouritesActions'
 import RepoListItem from '../RepoList/RepoListItem';
 import { HeartFillIcon, XCircleIcon } from '@primer/octicons-react';
 import React from 'react';
+import { IRepositoryDto } from '../../modules/API/Repository/RepositoryApi.interface';
 
 export function FavouritesContainer() {
     const favourites = useSelector<AppState, FavouritesState>(state => state.favourites);
     const dispatch = useDispatch();
 
-    const onFavouritesIconClick = (repository_data: Repository) => {
+    const onFavouritesIconClick = (repository_data: IRepositoryDto) => {
         return dispatch(removeRepositoryFromFavourites(repository_data));
     };
 
-    const favouriteRepos = favourites.map((repository: Repository, index: number) => {
+    const favouriteRepos = favourites.map((repository: IRepositoryDto, index: number) => {
         return (
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                 <RepoListItem

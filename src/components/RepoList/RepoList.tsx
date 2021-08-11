@@ -1,9 +1,10 @@
 import React from 'react';
 import { Repository } from '../../constants/types';
 import RepoListItem from './RepoListItem';
+import { IRepositoryDto } from '../../modules/API/Repository/RepositoryApi.interface';
 
 interface RepoListProps {
-    repositories: Repository[];
+    repositories: IRepositoryDto[];
 }
 
 const RepoList: React.FC<RepoListProps> = ({ repositories }) => {
@@ -11,7 +12,7 @@ const RepoList: React.FC<RepoListProps> = ({ repositories }) => {
         return null;
     }
 
-    const repositoryList = repositories.map((repository: Repository, index: number) => {
+    const repositoryList = repositories.map((repository: IRepositoryDto, index: number) => {
         return <RepoListItem listItemKey={repository.name + index} repository={repository} />;
     });
 

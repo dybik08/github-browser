@@ -2,9 +2,10 @@ import React from 'react';
 import githubLangColors from '../../github-lang-colors';
 import { GitForkIcon, StarIcon } from '@primer/octicons-react';
 import { Repository } from '../../constants/types';
+import { IRepositoryDto } from '../../modules/API/Repository/RepositoryApi.interface';
 
 interface RepoInfoRowProps {
-    repository_data: Repository;
+    repository_data: IRepositoryDto;
 }
 
 export const RepoInfoRow: React.FC<RepoInfoRowProps> = ({ repository_data }) => {

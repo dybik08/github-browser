@@ -5,6 +5,7 @@ import { RepoDetailsModal } from '../../../components/RepoDetailsModal/RepoDetai
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import * as networkActions from '../../../actions/networkActions';
+import { RepositoryDtoBuilder } from '../../../modules/API';
 const mockStore = configureStore();
 
 configure({ adapter: new Adapter() });
@@ -53,7 +54,7 @@ describe('RepoDetailsModal', () => {
             <Provider store={mockStore(initialState)}>
                 {' '}
                 <RepoDetailsModal
-                    repository_data={mock_repository_data}
+                    repository_data={RepositoryDtoBuilder.prefilled().build()}
                     handleCancel={jest.fn()}
                     handleOk={jest.fn()}
                 />

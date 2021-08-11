@@ -1,6 +1,7 @@
 import { NetworkActionNames } from '../actions/networkActions';
 import { Repository } from '../constants/types';
 import { repositoriesResponseHandler } from '../utils/networkUtils';
+import { IRepositoryDto } from '../modules/API/Repository/RepositoryApi.interface';
 
 export const repositoriesReducerInitialState = {
     repos: [],
@@ -8,7 +9,7 @@ export const repositoriesReducerInitialState = {
 };
 
 export interface RepositoriesState {
-    repos: Repository[];
+    repos: IRepositoryDto[];
     loading: boolean;
 }
 

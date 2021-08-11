@@ -7,6 +7,7 @@ import { Repository } from '../constants/types';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../reducers';
 import { RepositoriesState } from '../reducers/repositoriesReducer';
+import { IRepositoryDto } from '../modules/API/Repository/RepositoryApi.interface';
 
 function DetailsButton(props: { onClick: () => void }) {
     return (
@@ -16,11 +17,11 @@ function DetailsButton(props: { onClick: () => void }) {
     );
 }
 
-const TableComponent = (props: { setSelectedRepository: (repoData: Repository) => void }) => {
+const TableComponent = (props: { setSelectedRepository: (repoData: IRepositoryDto) => void }) => {
     const repositories = useSelector<AppState, RepositoriesState>(
         (state: {
             repositories: {
-                repos: Repository[];
+                repos: IRepositoryDto[];
                 loading: boolean;
             };
         }) => state.repositories
@@ -131,7 +132,7 @@ const TableComponent = (props: { setSelectedRepository: (repoData: Repository) =
         },
     ];
 
-    const reposDataWithButton = repositories.repos?.map((repoData: Repository) => {
+    const reposDataWithButton = repositories.repos?.map((repoData: IRepositoryDto) => {
         return {
             ...repoData,
             details: (

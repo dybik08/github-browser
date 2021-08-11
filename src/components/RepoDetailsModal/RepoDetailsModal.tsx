@@ -7,16 +7,17 @@ import RepoInfoRow from './RepoInfoRow';
 import { Repository } from '../../constants/types';
 import { Collapse } from 'antd';
 import { FavouritesIcon } from '../Favourites/FavouritesIcon';
+import { IRepositoryDto } from '../../modules/API/Repository/RepositoryApi.interface';
 const { Panel } = Collapse;
 
 interface RepoDetailsModalProps {
-    repository_data: Repository;
+    repository_data: IRepositoryDto;
     handleOk: () => void;
     handleCancel: () => void;
 }
 
 export const RepoDetailsModal: React.FC<RepoDetailsModalProps> = ({ repository_data, handleOk, handleCancel }) => {
-    const [additionalUserRepos, setAdditionalUserRepos] = React.useState<Repository[]>([]);
+    const [additionalUserRepos, setAdditionalUserRepos] = React.useState<IRepositoryDto[]>([]);
 
     useEffect(() => {
         if (additionalUserRepos.length === 0) {
@@ -51,9 +52,9 @@ export const RepoDetailsModal: React.FC<RepoDetailsModalProps> = ({ repository_d
                     </div>
                 </Panel>
                 <Panel header='Repo details' key='2'>
-                    <p id='created_at'>Created: {repository_data.created_at}</p>
-                    <p id='updated_at'>Last change: {repository_data.updated_at}</p>
-                    {repository_data.license && <p>License: {repository_data.license?.name}</p>}
+                    <p id='created_at'>Created: {repository_data.createdAt}</p>
+                    <p id='updated_at'>Last change: {repository_data.updatedAt}</p>
+                    {<p>License: {repository_data.license}</p>}
                 </Panel>
                 <Panel header={repository_data.owner?.type + ' repos'} key='3'>
                     <RepoList repositories={additionalUserRepos} />

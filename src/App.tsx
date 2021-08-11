@@ -8,11 +8,12 @@ import { Provider } from 'react-redux';
 import configuredStore from './reducers/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { FavouritesContainer } from './components/Favourites/FavouritesContainer';
+import { IRepositoryDto } from './modules/API/Repository/RepositoryApi.interface';
 
 const { store, persistor } = configuredStore;
 
 export function App() {
-    const [selectedRepository, setSelectedRepository] = useState<Repository | null>(null);
+    const [selectedRepository, setSelectedRepository] = useState<IRepositoryDto | null>(null);
     const handleOk = () => {
         setSelectedRepository(null);
     };
