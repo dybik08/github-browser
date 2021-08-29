@@ -1,6 +1,6 @@
 import { FavouritesActions } from '../actions/favouritesActions';
-import { Repository } from '../constants/types';
-export type FavouritesState = Repository[];
+import { IRepositoryDto } from '../modules/API/Repository/RepositoryApi.interface';
+export type FavouritesState = IRepositoryDto[];
 
 const favouritesReducerInitialState: FavouritesState = [];
 

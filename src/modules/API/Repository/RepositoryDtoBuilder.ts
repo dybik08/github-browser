@@ -4,6 +4,10 @@ import { RepositoryOwner } from '../../../constants/types';
 export class RepositoryDtoBuilder {
     private constructor(private readonly dto: Partial<IRepositoryDto> = {}) {}
 
+    static empty(): RepositoryDtoBuilder {
+        return new RepositoryDtoBuilder();
+    }
+
     static prefilled(): RepositoryDtoBuilder {
         return new RepositoryDtoBuilder()
             .withId(1)
