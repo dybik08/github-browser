@@ -18,7 +18,7 @@ export const RepoInfoRow: React.FC<RepoInfoRowProps> = ({ repository_data }) => 
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <StarIcon className='icon' />
-                    <div id={'stargazers_count'}>{repository_data.stargazers_count}</div>
+                    <div id={'stargazersCount'}>{repository_data.stargazersCount}</div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <GitForkIcon className='icon' />

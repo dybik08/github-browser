@@ -18,7 +18,7 @@ const mock_repository_data = {
     name: 'name',
     description: 'some description',
     language: 'javascript',
-    stargazers_count: 1,
+    stargazersCount: 1,
     forks: 2,
     owner: {
         repos_url: 'repos_url',

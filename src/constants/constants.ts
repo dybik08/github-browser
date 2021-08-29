@@ -1,12 +1,11 @@
 enum REPO_DATA_FIELDS {
-    login = 'login',
+    owner = 'owner',
     language = 'language',
-    stargazers_count = 'stargazers_count',
+    stargazersCount = 'stargazersCount',
     name = 'name',
     details = 'details',
 }
 
-
 export default {
-    REPO_DATA_FIELDS
-}
+    REPO_DATA_FIELDS,
+};

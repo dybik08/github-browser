@@ -14,7 +14,7 @@ export interface Repository {
     name: string;
     description: string;
     language: string;
-    stargazers_count: number;
+    stargazersCount: number;
     forks: number;
     owner: RepositoryOwner;
     created_at: string;

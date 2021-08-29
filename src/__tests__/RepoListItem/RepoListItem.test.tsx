@@ -22,9 +22,9 @@ describe('RepoListItem', () => {
         expect(languageName).toBeTruthy();
     });
 
-    it('should display stargazers_count correctly', () => {
-        const stargazers_count = wrapper.findWhere((node: any) => node.text() === mockRepositoryData.stargazers_count);
-        expect(stargazers_count).toBeTruthy();
+    it('should display stargazersCount correctly', () => {
+        const stargazersCount = wrapper.findWhere((node: any) => node.text() === mockRepositoryData.stargazersCount);
+        expect(stargazersCount).toBeTruthy();
     });
 
     it('should display forks correctly', () => {

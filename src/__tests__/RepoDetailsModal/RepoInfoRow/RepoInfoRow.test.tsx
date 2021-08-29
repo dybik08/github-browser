@@ -3,7 +3,7 @@ import { configure, shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
 import Adapter from 'enzyme-adapter-react-16';
 import { RepoInfoRow } from '../../../components/RepoDetailsModal/RepoInfoRow';
-import mockRepositoryData from "../../../__mocks__/mockRepositoryData";
+import mockRepositoryData from '../../../__mocks__/mockRepositoryData';
 
 configure({ adapter: new Adapter() });
 
@@ -20,9 +20,9 @@ describe('RepoInfoRow', () => {
         expect(language).toBe('javascript');
     });
 
-    it('render correct stargazers_count', () => {
-        const stargazers_count = wrapper.find({ id: 'stargazers_count' }).text();
-        expect(stargazers_count).toBe('1');
+    it('render correct stargazersCount', () => {
+        const stargazersCount = wrapper.find({ id: 'stargazersCount' }).text();
+        expect(stargazersCount).toBe('1');
     });
 
     it('render correct forks', () => {

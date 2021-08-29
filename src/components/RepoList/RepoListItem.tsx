@@ -20,7 +20,7 @@ export const RepoListItem: React.FC<RepoListItemProps> = ({ repository, listItem
             </div>
             <div style={{ flex: 1 }}>
                 <StarIcon className='icon' />
-                {repository.stargazers_count}
+                {repository.stargazersCount}
             </div>
             <div style={{ flex: 1 }}>
                 <GitForkIcon className='icon' />

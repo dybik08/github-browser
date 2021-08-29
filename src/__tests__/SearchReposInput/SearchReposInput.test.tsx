@@ -23,7 +23,7 @@ jest.mock('../../actions/networkActions', () => ({
             name: 'name',
             description: 'some description',
             language: 'javascript',
-            stargazers_count: 1,
+            stargazersCount: 1,
             forks: 2,
             owner: {
                 repos_url: '',

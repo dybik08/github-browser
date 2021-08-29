@@ -99,10 +99,10 @@ const TableComponent = (props: { setSelectedRepository: (repoData: IRepositoryDt
 
     const columns = [
         {
-            title: CONSTANTS.REPO_DATA_FIELDS.login,
-            dataIndex: CONSTANTS.REPO_DATA_FIELDS.login,
-            key: CONSTANTS.REPO_DATA_FIELDS.login,
-            ...getColumnSearchProps(CONSTANTS.REPO_DATA_FIELDS.login),
+            title: CONSTANTS.REPO_DATA_FIELDS.owner,
+            dataIndex: [CONSTANTS.REPO_DATA_FIELDS.owner, 'login'],
+            key: CONSTANTS.REPO_DATA_FIELDS.owner,
+            ...getColumnSearchProps(CONSTANTS.REPO_DATA_FIELDS.owner),
         },
         {
             title: CONSTANTS.REPO_DATA_FIELDS.language,
@@ -113,9 +113,9 @@ const TableComponent = (props: { setSelectedRepository: (repoData: IRepositoryDt
         },
         {
             title: 'stars',
-            dataIndex: CONSTANTS.REPO_DATA_FIELDS.stargazers_count,
-            key: CONSTANTS.REPO_DATA_FIELDS.stargazers_count,
-            ...getColumnSearchProps(CONSTANTS.REPO_DATA_FIELDS.stargazers_count),
+            dataIndex: CONSTANTS.REPO_DATA_FIELDS.stargazersCount,
+            key: CONSTANTS.REPO_DATA_FIELDS.stargazersCount,
+            ...getColumnSearchProps(CONSTANTS.REPO_DATA_FIELDS.stargazersCount),
         },
         {
             title: CONSTANTS.REPO_DATA_FIELDS.name,

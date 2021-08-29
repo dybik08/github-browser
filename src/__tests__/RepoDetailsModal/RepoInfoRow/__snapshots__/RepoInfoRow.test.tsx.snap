@@ -56,7 +56,7 @@ exports[`RepoInfoRow renders correctly 1`] = `
       width={16}
     />
     <div
-      id="stargazers_count"
+      id="stargazersCount"
     >
       1
     </div>
