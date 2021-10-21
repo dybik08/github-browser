@@ -1,5 +1,5 @@
 import { IRepositoryDto } from './RepositoryApi.interface';
-import { RepositoryOwner } from '../../../constants/types';
+import { RepositoryOwner } from 'constants/types';
 
 export class RepositoryDtoBuilder {
     private constructor(private readonly dto: Partial<IRepositoryDto> = {}) {}

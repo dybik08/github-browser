@@ -1,5 +1,4 @@
-import { Repository } from '../constants/types';
-import { IRepositoryDto } from '../modules/API/Repository/RepositoryApi.interface';
+import { IRepositoryDto } from 'modules/API';
 
 export enum FavouritesActions {
     ADD_TO_FAVOURITE = 'ADD_TO_FAVOURITE',

@@ -1,46 +1,26 @@
 import React from 'react';
 import { Input, message, Tooltip } from 'antd';
-import { NetworkActionNames } from '../actions/networkActions';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { InfoCircleOutlined } from '@ant-design/icons/lib';
-import { AppState } from '../reducers';
-import { RepositoriesState } from '../reducers/repositoriesReducer';
-import { useApi } from '../modules/API/Api.context';
+import { AppState } from 'reducers';
+import { RepositoriesState } from 'reducers/repositoriesReducer';
+import { useSearch } from 'modules/hooks';
+import { useFetchRepository } from 'modules/Repository';
 const { Search } = Input;
 
-const useSearchRepository = () => {
-    const [inputValue, setInputValue] = React.useState<string>('');
+export const SearchReposInput = () => {
     const repositories = useSelector<AppState, RepositoriesState>(state => state.repositories);
-    const { repositoryApi } = useApi();
-    const dispatch = useDispatch();
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setInputValue(event.target.value);
-    };
+    const { inputValue, handleInputChange } = useSearch();
+    const { fetchRepositories } = useFetchRepository(inputValue);
 
     const onSearchReposButtonPress = async () => {
         if (inputValue.length === 0) {
             return message.error('Please fill search bar before continue', 1);
         }
 
-        const formattedQuery = inputValue.replace('/,/g', '+');
-
-        dispatch({ type: NetworkActionNames.START_FETCHING_REPOS });
-        repositoryApi
-            .getRepositories(formattedQuery)
-            .then(res => {
-                dispatch({ type: NetworkActionNames.FETCHING_REPOS_DONE, payload: res.items });
-            })
-            .catch(e => {
-                dispatch({ type: NetworkActionNames.FETCHING_REPOS_ERROR, payload: e });
-            });
+        fetchRepositories();
     };
-
-    return { inputValue, handleInputChange, onSearchReposButtonPress, repositories };
-};
-
-export const SearchReposInput = () => {
-    const { inputValue, handleInputChange, onSearchReposButtonPress, repositories } = useSearchRepository();
 
     return (
         <Search

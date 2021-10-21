@@ -1,6 +1,6 @@
-import { NetworkActionNames } from '../actions/networkActions';
-import { IBackendRepositoryDto, IRepositoryDto } from '../modules/API/Repository/RepositoryApi.interface';
-import { RepositoryDtoBuilder } from '../modules/API';
+import { NetworkActionNames } from 'actions/networkActions';
+import { IBackendRepositoryDto, IRepositoryDto } from 'modules/API';
+import { RepositoryDtoBuilder } from 'modules/API';
 
 export const repositoriesReducerInitialState = {
     repos: [],
