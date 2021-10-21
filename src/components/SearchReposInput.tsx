@@ -39,7 +39,7 @@ const useSearchRepository = () => {
     return { inputValue, handleInputChange, onSearchReposButtonPress, repositories };
 };
 
-const SearchReposInput = () => {
+export const SearchReposInput = () => {
     const { inputValue, handleInputChange, onSearchReposButtonPress, repositories } = useSearchRepository();
 
     return (

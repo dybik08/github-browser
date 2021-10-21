@@ -3,11 +3,10 @@ import { SearchOutlined } from '@ant-design/icons';
 import React from 'react';
 import 'antd/dist/antd.css';
 import CONSTANTS from '../constants/constants';
-import { Repository } from '../constants/types';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../reducers';
-import { RepositoriesState } from '../reducers/repositoriesReducer';
-import { IRepositoryDto } from '../modules/API/Repository/RepositoryApi.interface';
+import { useSelector } from 'react-redux';
+import { AppState } from 'reducers';
+import { RepositoriesState } from 'reducers/repositoriesReducer';
+import { IRepositoryDto } from 'modules/API';
 
 function DetailsButton(props: { onClick: () => void }) {
     return (
@@ -17,7 +16,7 @@ function DetailsButton(props: { onClick: () => void }) {
     );
 }
 
-const TableComponent = (props: { setSelectedRepository: (repoData: IRepositoryDto) => void }) => {
+export const ReposDataTable = (props: { setSelectedRepository: (repoData: IRepositoryDto) => void }) => {
     const repositories = useSelector<AppState, RepositoriesState>(
         (state: {
             repositories: {
@@ -147,5 +146,3 @@ const TableComponent = (props: { setSelectedRepository: (repoData: IRepositoryDt
 
     return <Table pagination={{ pageSize: 5 }} columns={columns} dataSource={reposDataWithButton} />;
 };
-
-export default TableComponent;

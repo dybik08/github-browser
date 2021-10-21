@@ -1,4 +1,4 @@
-import { IBackendRepositoryDto, IRepositoryDto } from '../../modules/API/Repository/RepositoryApi.interface';
+import { IBackendRepositoryDto, IRepositoryDto } from 'modules/API';
 
 export const repositoriesResponseHandler = (repositories: IBackendRepositoryDto[]): IRepositoryDto[] => {
     return repositories.map((repo: IBackendRepositoryDto, index: number) => {
